@@ -194,7 +194,7 @@ def get_movie_card(movie, with_rating=False):
     prevent_initial_call=True,
 )    
 
-def on_recommend_button_clicked(n, ratings, ids):
+def on_recommend_button_clicked(n):
     return {"display": "none"}, {"display": "block"}
 
 @app.callback(
