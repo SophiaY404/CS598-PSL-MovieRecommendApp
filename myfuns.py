@@ -83,14 +83,14 @@ for genre in genres:
 top_movies_df = pd.concat(top_movies)
 
 def myIBCF(newuser): #newuser is a np array where unreviewed movies are nan
-    S = pd.read_csv("https://raw.githubusercontent.com/briany8/cs598/main/S_top30.csv")
-    #S = pd.read_csv("https://raw.githubusercontent.com/SophiaY404/CS598-PSL-MovieRecommendApp/main/S0.csv")
+    #S = pd.read_csv("https://raw.githubusercontent.com/briany8/cs598/main/S_top30.csv")
+    S = pd.read_csv("https://raw.githubusercontent.com/SophiaY404/CS598-PSL-MovieRecommendApp/main/S0.csv")
     S.index = S.columns
     newuser = pd.Series(newuser).reindex(S.columns)
     w = pd.DataFrame(data=newuser.values, index=S.columns)
 
-    out = np.zeros(3706)
-    for j in range(3706):
+    out = np.zeros(100)
+    for j in range(100):
         l = S.columns[j]
         Sl = S.loc[l].dropna().index
         rhs_total = 0
@@ -115,8 +115,12 @@ def myIBCF(newuser): #newuser is a np array where unreviewed movies are nan
 
 
 def get_displayed_movies():
-    return movies.sample(100) #get random sample of movies
+    #return movies.sample(100) #get random sample of movies
     #return movies.head(100)
+    S0 = pd.read_csv("https://raw.githubusercontent.com/SophiaY404/CS598-PSL-MovieRecommendApp/main/S0.csv")
+    movie_ids = S0.columns[:100].str[1:].astype(int)
+    movies_subset = movies[movies['movie_id'].isin(movie_ids)]
+    return movies_subset
 
 def get_recommended_movies(new_user_ratings):
     recs = myIBCF(new_user_ratings)
