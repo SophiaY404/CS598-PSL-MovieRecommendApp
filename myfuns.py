@@ -83,8 +83,8 @@ for genre in genres:
 top_movies_df = pd.concat(top_movies)
 
 def myIBCF(newuser): #newuser is a np array where unreviewed movies are nan
-    #S = pd.read_csv("https://raw.githubusercontent.com/briany8/cs598/main/S_top30.csv")
-    S = pd.read_csv("https://raw.githubusercontent.com/SophiaY404/CS598-PSL-MovieRecommendApp/main/S0.csv")
+    S = pd.read_csv("https://raw.githubusercontent.com/briany8/cs598/main/S_top30.csv")
+    #S = pd.read_csv("https://raw.githubusercontent.com/SophiaY404/CS598-PSL-MovieRecommendApp/main/S0.csv")
     S.index = S.columns
     newuser = pd.Series(newuser).reindex(S.columns)
     w = pd.DataFrame(data=newuser.values, index=S.columns)
